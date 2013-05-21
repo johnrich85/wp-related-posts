@@ -1,21 +1,18 @@
 # Ignore everything in the root except the "wp-content" directory.
-*
 /*
 
+# Show git ignore & wp-content folder.
 !.gitignore
 !wp-content/
  
 # Ignore everything in the "wp-content" directory, except the "plugins"
-# and "themes" directories.
+# directory
 wp-content/*
+!wp-content/plugins/
  
-# Ignore everything in the "plugins" directory, except the plugins you
-# specify (see the commented-out examples for hints on how to do this.)
+# Ignore everything in the "plugins" directory, except the related post
+# plugin.
 wp-content/plugins/*
-!wp-content/plugins/weeb-related-posts/
-!wp-content/plugins/weeb-related-posts/*
- 
-# Ignore everything in the "themes" directory, except the themes you
-# specify (see the commented-out example for a hint on how to do this.)
-wp-content/themes/*
+
+!wp-content/plugins/weeb-related-posts
 
