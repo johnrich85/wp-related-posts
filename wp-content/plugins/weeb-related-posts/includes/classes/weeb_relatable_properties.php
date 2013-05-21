@@ -51,10 +51,11 @@ class weeb_relatable_properties {
     }
 
     /**
-     * setCategories
      *
-     * Gets array of categories and stores in class property.
+     * Gets post tags and stores in array.
+     *
      */
+
     public function setTags() {
 
         $tags = wp_get_post_tags($this->post->ID, array("fields" => "ids"));
@@ -68,12 +69,12 @@ class weeb_relatable_properties {
     }
 
     /**
-     * getCategories
      *
-     * Returns list of categories.
+     * If tags is set, returns @array tags.
      *
-     * @return array
+     * @return mixed
      */
+
     public function getTags() {
         if ( isset($this->tags) ) {
             return $this->tags;
@@ -85,12 +86,12 @@ class weeb_relatable_properties {
     }
 
 
-
     /**
-     * setKeywords
      *
-     * Gets post title and stores in class property.
+     * Breaks post title down into a bunch of keywords & stores in array.
+     *
      */
+
     public function setKeywords() {
 
         //Some words we don't really want to search by, it's not a comprehensive
@@ -113,12 +114,12 @@ class weeb_relatable_properties {
     }
 
     /**
-     * getKeywords
      *
-     * Returns array of keywords.
+     * Returns an array of keywords.
      *
      * @return array
      */
+
     public function getKeywords() {
         if ( isset($this->keywords) ) {
             return $this->keywords;
@@ -130,12 +131,12 @@ class weeb_relatable_properties {
     }
 
     /**
-     * getKeywords
      *
-     * Returns array of keywords.
+     * Returns the post id.
      *
      * @return array
      */
+
     public function getID() {
         if ( isset($this->post) ) {
             return $this->post->ID;

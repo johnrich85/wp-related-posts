@@ -21,6 +21,15 @@ class weeb_related_posts {
 
     }
 
+    /**
+     *
+     * Recursive function - repeats x amount of times until the required
+     * number of posts are found, or the search criteria can no longer
+     * be dimished.
+     *
+     * @return mixed
+     */
+
     public function getRelatedPosts() {
 
         //Run query.
@@ -62,6 +71,15 @@ class weeb_related_posts {
 
     }
 
+    /**
+     *
+     * Makes the search parameters less restrictive on each call. Returns false
+     * if this is not possible, which can be used to stop the recursion in
+     * 'getRelatedPosts()'
+     *
+     * @return bool
+     */
+
     public function diminish_search_params() {
 
         //No longer restricting results by title
@@ -80,14 +98,36 @@ class weeb_related_posts {
 
     }
 
+    /**
+     *
+     * Used to assign search parameters to class property.
+     *
+     * @param $argsArray Array containing parameters for WP_Query
+     */
+
     public function set_query_args($argsArray) {
         //Defining arguments for wp_query.
         $this->query_args = $argsArray;
     }
 
+    /**
+     *
+     * Returns the number of posts currently stored in $this->posts
+     *
+     * @return int
+     */
+
     public function getNumPosts() {
         return $this->num_posts;
     }
+
+    /**
+     *
+     * Adds an ID to the ignore list so that it will not be returned
+     * in future queries.
+     *
+     * @param $id post id
+     */
 
     public function store_ID($id) {
         if ( isset($this->query_args['post__not_in']) ) {
