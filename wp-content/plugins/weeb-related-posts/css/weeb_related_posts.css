@@ -1,0 +1,21 @@
+/*Reset*/
+#weeb-related-posts, #weeb-related-posts li, #weeb-related-posts h4, #weeb-related-posts a {
+    margin:0;
+    padding:0;
+    text-decoration: none;
+}
+#weeb-related-title {
+    margin-bottom:16px;
+}
+#weeb-related-posts {
+    list-style:none;
+    overflow: hidden;
+}
+#weeb-related-posts li {
+    float:left;
+    widtH:48%;
+    margin-left:4%;
+}
+#weeb-related-posts li:first-child {
+    margin-left:0;
+}
