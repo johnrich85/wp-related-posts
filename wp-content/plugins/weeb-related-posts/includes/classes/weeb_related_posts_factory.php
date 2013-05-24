@@ -11,14 +11,14 @@ class weeb_related_posts_factory {
 
     public static function create($post, $required_posts) {
 
-        //Instantiating object to retrieve post details.
+        //Instantiating object which retrieves post details.
         $postProperties = new weeb_relatable_properties($post);
 
-        //Setting the required properties.
+        //Storing the required properties.
         $postProperties->setCategories();
         $postProperties->setKeywords();
         $postProperties->setTags();
-
+    
         $getRelatedPosts = new weeb_related_posts($required_posts);
 
         //Setting the parameters for WP_query.
