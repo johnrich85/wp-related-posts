@@ -25,7 +25,7 @@ class weeb_related_posts {
      *
      * Recursive function - repeats x amount of times until the required
      * number of posts are found, or the search criteria can no longer
-     * be dimished.
+     * be diminished.
      *
      * @return mixed
      */
@@ -59,7 +59,7 @@ class weeb_related_posts {
         }
 
         //Check if enough posts returned
-        if ($this->num_posts < $this->num_required && $this->diminish_search_params()) {
+        if ($this->num_posts < $this->num_required && $this->diminish_search_criteria()) {
             return $this->getRelatedPosts();
         }
         else {
@@ -71,14 +71,14 @@ class weeb_related_posts {
 
     /**
      *
-     * Makes the search parameters less restrictive on each call. Returns false
-     * if this is not possible, which can be used to stop the recursion in
+     * Makes the search criteria less restrictive on each call. Returns false
+     * if this is no longer possible - used to halt the recursion in
      * 'getRelatedPosts()'
      *
      * @return bool
      */
 
-    public function diminish_search_params() {
+    public function diminish_search_criteria() {
 
         //No longer restricting results by title
         if ( isset($this->query_args['search_prod_title'])) {

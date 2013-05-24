@@ -28,10 +28,10 @@ License: GPL2
 define( 'PLUGIN_DIR', dirname(__FILE__).'/' );
 
 
-//Hooks a function to a filter action, 'the_content' being the action, 'hello_world' the function.
+//Hooks function to 'the_content' filter.
 add_filter('the_content','related_posts');
 
-//Callback function
+//Callback function for the above.
 function related_posts($content)
 {
     //Gives us access to the global post object.
@@ -51,13 +51,13 @@ function related_posts($content)
         //Using a factory to abstract away the process of instantiating related posts object.
         $getRelatedPosts = weeb_related_posts_factory::create($post, 2);
 
-        //Also want to filter results by title - need to add filter for this
+        //Adding additional SQL to WP_Query temporarily - used to search title for any of the keywords.
         add_filter( 'posts_where', 'title_filter', 10, 2 );
 
         //Fetching the related posts.
         $related = $getRelatedPosts->getRelatedPosts();
 
-        //Remove filter, won't be using it again.
+        //Remove the filter, no longer needed.
         remove_filter('posts_where', 'title_filter');
 
         //Checking for related posts.
@@ -65,6 +65,7 @@ function related_posts($content)
             //Add the stylesheet.
             wp_enqueue_style( 'myPluginStylesheet', plugins_url('css/weeb_related_posts.css', __FILE__)  );
 
+            //Storing HTML to variable.
             $rel_html = '<h3 id="weeb-related-title"> You may also like these posts: </h3>';
             $rel_html .= "<ul id=\"weeb-related-posts\">";
             foreach ( $related as $the_post) {
@@ -81,6 +82,7 @@ function related_posts($content)
             //Adding custom content to end of post.
             return $content . $rel_html;
         }
+        //no posts, return content as usual.
         else {
             return $content;
         }
