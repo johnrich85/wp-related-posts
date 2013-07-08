@@ -74,7 +74,7 @@ function related_posts($content)
         else {
             return $content;
         }
-        
+
 	}
 	else {
 		//else on blog page / home page etc, just return content as usual.

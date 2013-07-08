@@ -36,5 +36,9 @@ function weeb_related_posts_title_filter( $where, &$wp_query )
 
 function weeb_related_posts_get_template( $template, $data )
 {
-    include($template);
+    ob_start();
+    $test = include($template);
+    $echoed_content = ob_get_clean();
+    return $echoed_content ;
+
 }
