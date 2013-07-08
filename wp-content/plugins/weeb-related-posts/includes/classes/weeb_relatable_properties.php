@@ -3,6 +3,9 @@
  * weeb_relatable_properties
  *
  *
+ * Used to gather information from a post and convert to more friendly/useful
+ * format where appropriate.
+ *
  * @author     John Richardson <johnrich85@hotmail.com>
  */
 

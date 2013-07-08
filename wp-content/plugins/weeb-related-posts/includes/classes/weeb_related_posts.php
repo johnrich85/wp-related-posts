@@ -2,6 +2,7 @@
 /**
  * weeb_related_posts
  *
+ * Fetches the related posts of a given post.
  *
  * @author     John Richardson <johnrich85@hotmail.com>
  */

@@ -25,7 +25,7 @@ License: GPL2
 */
 
 //Defining Constants
-define( 'PLUGIN_DIR', dirname(__FILE__).'/' );
+define( 'WEEB_RELATEDPOSTS_PLUGIN_DIR', dirname(__FILE__).'/' );
 
 
 //Hooks function to 'the_content' filter.
@@ -41,12 +41,12 @@ function related_posts($content)
 	if ( is_single() ) {
 
         //Including classes
-        include(PLUGIN_DIR."includes/classes/weeb_relatable_properties.php");
-        include(PLUGIN_DIR."includes/classes/weeb_related_posts.php");
-        include(PLUGIN_DIR."includes/classes/weeb_related_posts_factory.php");
+        include(WEEB_RELATEDPOSTS_PLUGIN_DIR."includes/classes/weeb_relatable_properties.php");
+        include(WEEB_RELATEDPOSTS_PLUGIN_DIR."includes/classes/weeb_related_posts.php");
+        include(WEEB_RELATEDPOSTS_PLUGIN_DIR."includes/classes/weeb_related_posts_factory.php");
 
         //Other includes
-        include(PLUGIN_DIR."includes/weeb_functions.php");
+        include(WEEB_RELATEDPOSTS_PLUGIN_DIR."includes/weeb_functions.php");
 
         //Using a factory to abstract away the process of instantiating related posts object.
         $getRelatedPosts = weeb_related_posts_factory::create($post, 2);
@@ -92,5 +92,3 @@ function related_posts($content)
 		return $content;
 	}
 }
-
-?>

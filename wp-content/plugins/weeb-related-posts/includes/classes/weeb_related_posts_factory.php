@@ -1,10 +1,10 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: Aziz
- * Date: 20/05/13
- * Time: 16:29
- * To change this template use File | Settings | File Templates.
+ * weeb_related_posts_factory
+ *
+ * Instantiates and configures related posts object.
+ *
+ * @author     John Richardson <johnrich85@hotmail.com>
  */
 
 class weeb_related_posts_factory {
@@ -18,7 +18,7 @@ class weeb_related_posts_factory {
         $postProperties->setCategories();
         $postProperties->setKeywords();
         $postProperties->setTags();
-    
+
         $getRelatedPosts = new weeb_related_posts($required_posts);
 
         //Setting the parameters for WP_query.
