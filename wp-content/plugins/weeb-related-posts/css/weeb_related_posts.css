@@ -16,6 +16,10 @@
     widtH:48%;
     margin-left:4%;
 }
+#weeb-related-posts li img {
+    widtH:100%;
+    height:180px;
+}
 #weeb-related-posts li:first-child {
     margin-left:0;
 }

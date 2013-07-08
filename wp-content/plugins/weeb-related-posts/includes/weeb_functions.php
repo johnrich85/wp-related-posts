@@ -8,7 +8,7 @@
  * @param $wp_query
  * @return string
  */
-function title_filter( $where, &$wp_query )
+function weeb_related_posts_title_filter( $where, &$wp_query )
 {
     global $wpdb;
     if ( $search_term = $wp_query->get( 'search_prod_title' ) ) {
@@ -32,4 +32,9 @@ function title_filter( $where, &$wp_query )
     }
 
     return $where;
+}
+
+function weeb_related_posts_get_template( $template, $data )
+{
+    include($template);
 }

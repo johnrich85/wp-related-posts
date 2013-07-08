@@ -25,8 +25,8 @@ License: GPL2
 */
 
 //Defining Constants
-define( 'WEEB_RELATEDPOSTS_PLUGIN_DIR', dirname(__FILE__).'/' );
-
+define( 'WEEB_RELATED_POSTS_PLUGIN_DIR', plugin_dir_path( __FILE__ ).'/' );
+define( 'WEEB_RELATED_POSTS_WEB_PATH', plugins_url("weeb-related-posts") ."/");
 
 //Hooks function to 'the_content' filter.
 add_filter('the_content','related_posts');
@@ -41,24 +41,24 @@ function related_posts($content)
 	if ( is_single() ) {
 
         //Including classes
-        include(WEEB_RELATEDPOSTS_PLUGIN_DIR."includes/classes/weeb_relatable_properties.php");
-        include(WEEB_RELATEDPOSTS_PLUGIN_DIR."includes/classes/weeb_related_posts.php");
-        include(WEEB_RELATEDPOSTS_PLUGIN_DIR."includes/classes/weeb_related_posts_factory.php");
+        include(WEEB_RELATED_POSTS_PLUGIN_DIR."includes/classes/weeb_relatable_properties.php");
+        include(WEEB_RELATED_POSTS_PLUGIN_DIR."includes/classes/weeb_related_posts.php");
+        include(WEEB_RELATED_POSTS_PLUGIN_DIR."includes/classes/weeb_related_posts_factory.php");
 
         //Other includes
-        include(WEEB_RELATEDPOSTS_PLUGIN_DIR."includes/weeb_functions.php");
+        include(WEEB_RELATED_POSTS_PLUGIN_DIR."includes/weeb_functions.php");
 
         //Using a factory to abstract away the process of instantiating related posts object.
         $getRelatedPosts = weeb_related_posts_factory::create($post, 2);
 
         //Adding additional SQL to WP_Query temporarily - used to search title for any of the keywords.
-        add_filter( 'posts_where', 'title_filter', 10, 2 );
+        add_filter( 'posts_where', 'weeb_related_posts_title_filter', 10, 2 );
 
         //Fetching the related posts.
         $related = $getRelatedPosts->getRelatedPosts();
 
         //Remove the filter, no longer needed.
-        remove_filter('posts_where', 'title_filter');
+        remove_filter('posts_where', 'weeb_related_posts_title_filter');
 
         //Checking for related posts.
         if ( count($related) > 0 ) {
@@ -66,18 +66,7 @@ function related_posts($content)
             wp_enqueue_style( 'myPluginStylesheet', plugins_url('css/weeb_related_posts.css', __FILE__)  );
 
             //Storing HTML to variable.
-            $rel_html = '<h3 id="weeb-related-title"> You may also like these posts: </h3>';
-            $rel_html .= "<ul id=\"weeb-related-posts\">";
-            foreach ( $related as $the_post) {
-                $rel_html .= "<li>";
-                    $rel_html .= "<a href=\"".$the_post['url'] ."\">";
-                    $rel_html .= $the_post['image'];
-                    $rel_html .= "<h4> ".$the_post['title']."</h4>";
-                    $rel_html .= "</a>";
-                $rel_html .= "</li>";
-            }
-            $rel_html .= "</ul>";
-
+            $rel_html = weeb_related_posts_get_template(WEEB_RELATED_POSTS_PLUGIN_DIR ."templates/related-posts.php", $related);
 
             //Adding custom content to end of post.
             return $content . $rel_html;
