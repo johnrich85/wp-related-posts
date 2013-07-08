@@ -10,11 +10,11 @@
 class weeb_related_posts {
 
     //Class properties
-    private $num_posts;
-    private $num_required;
-    private $posts;
-    private $query_args;
-    private $related_query;
+    protected $num_posts;
+    protected $num_required;
+    protected $posts;
+    protected $query_args;
+    protected $related_query;
 
     public function __construct($num_required = 2) {
 
