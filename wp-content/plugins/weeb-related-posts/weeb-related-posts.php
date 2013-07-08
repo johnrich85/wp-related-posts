@@ -39,7 +39,6 @@ function related_posts($content)
 
 	//Checking if on post page.
 	if ( is_single() ) {
-
         //Including classes
         include(WEEB_RELATED_POSTS_PLUGIN_DIR."includes/classes/weeb_relatable_properties.php");
         include(WEEB_RELATED_POSTS_PLUGIN_DIR."includes/classes/weeb_related_posts.php");
@@ -75,6 +74,7 @@ function related_posts($content)
         else {
             return $content;
         }
+        
 	}
 	else {
 		//else on blog page / home page etc, just return content as usual.
