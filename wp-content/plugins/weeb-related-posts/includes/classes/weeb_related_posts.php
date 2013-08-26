@@ -20,6 +20,9 @@ class weeb_related_posts {
 
         $this->num_required = $num_required;
 
+        //Adding additional SQL to WP_Query temporarily - used to search title for any of the keywords.
+        add_filter( 'posts_where', array($this, 'title_filter'), 10, 2 );
+
     }
 
     /**
@@ -64,6 +67,9 @@ class weeb_related_posts {
             return $this->getRelatedPosts();
         }
         else {
+
+            //Remove the filter, no longer needed.
+            remove_filter('posts_where', array($this, 'title_filter'));
 
             return $this->posts;
         }
@@ -136,6 +142,39 @@ class weeb_related_posts {
             $this->query_args['post__not_in'] = array();
             $this->query_args['post__not_in'][] = $id;
         }
+    }
+
+    /**
+     *
+     * Filter used to add additional sql to wp_query.
+     *
+     * @param $where
+     * @param $wp_query
+     * @return string
+     */
+    public function title_filter($where, &$wp_query) {
+        global $wpdb;
+        if ( $search_term = $wp_query->get( 'search_prod_title' ) ) {
+
+            $count = 0;
+            foreach ( $wp_query->get( 'search_prod_title' ) as $keyword ) {
+
+                if ( $count == 0 ) {
+                    $where .= ' AND (' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql( like_escape( $keyword ) ) . '%\'';
+                }
+                else {
+                    $where .= ' OR ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql( like_escape( $keyword ) ) . '%\'';
+                }
+
+
+                $count++;
+            }
+
+            $where .= ")";
+
+        }
+
+        return $where;
     }
 
 

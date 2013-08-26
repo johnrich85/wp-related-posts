@@ -50,14 +50,8 @@ function related_posts($content)
         //Using a factory to abstract away the process of instantiating related posts object.
         $getRelatedPosts = weeb_related_posts_factory::create($post, 2);
 
-        //Adding additional SQL to WP_Query temporarily - used to search title for any of the keywords.
-        add_filter( 'posts_where', 'weeb_related_posts_title_filter', 10, 2 );
-
         //Fetching the related posts.
         $related = $getRelatedPosts->getRelatedPosts();
-
-        //Remove the filter, no longer needed.
-        remove_filter('posts_where', 'weeb_related_posts_title_filter');
 
         //Checking for related posts.
         if ( count($related) > 0 ) {
